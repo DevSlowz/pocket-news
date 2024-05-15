@@ -17,7 +17,7 @@ def main ():
     title = driver.title
 
     driver.implicitly_wait(0.10)
-    stock_symbol = 'GME'
+    stock_symbol = 'FFIE'
     # Search Bar
     search_bar = driver.find_element(By.ID ,"yfin-usr-qry")
     # Search for user inputed stock symbol/tick and direct automation to page
@@ -37,6 +37,14 @@ def main ():
     # Extract the Earnings Per Share (EPS)
     earning_per_share = driver.find_element( By.XPATH,"//td[@data-test='EPS_RATIO-value']")
     print("EPS:", earning_per_share.text)
+
+    # Extract the Dividend Yield
+    dividend_yield = driver.find_element( By.XPATH,"//td[@data-test='DIVIDEND_AND_YIELD-value']")
+    print("Dividend Yield:", dividend_yield.text)
+
+    # Extract the Market Cap
+    market_cap = driver.find_element( By.XPATH,"//td[@data-test='MARKET_CAP-value']")
+    print("Market Cap:", market_cap.text)
 
 
     # text_box.send_keys("Selenium")
