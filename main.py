@@ -46,6 +46,15 @@ def main ():
     market_cap = driver.find_element( By.XPATH,"//td[@data-test='MARKET_CAP-value']")
     print("Market Cap:", market_cap.text)
 
+    # Navigate to the Statisitics page
+    driver.find_element( By.XPATH,'//*[@id="quote-nav"]/ul/li[4]/a').click()
+    time.sleep(2)
+
+    # Extract the Debt-to-Equity Ratio
+    doe_ratio = driver.find_element( By.XPATH, '//*[@id="Col1-0-KeyStatistics-Proxy"]/section/div[2]/div[3]/div/div[5]/div/div/table/tbody/tr[4]/td[2]')
+    print("Debt-to-Equity Ratio:", doe_ratio.text)
+    
+
 
     # text_box.send_keys("Selenium")
     # submit_button.click()
