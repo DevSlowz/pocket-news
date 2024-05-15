@@ -33,6 +33,12 @@ def main ():
     # Extract the Price-to-Earnings (P/E) Ratio
     price_to_earning = driver.find_element( By.XPATH,"//td[@data-test='PE_RATIO-value']")
     print("P/E:", price_to_earning.text)
+
+    # Extract the Earnings Per Share (EPS)
+    earning_per_share = driver.find_element( By.XPATH,"//td[@data-test='EPS_RATIO-value']")
+    print("EPS:", earning_per_share.text)
+
+
     # text_box.send_keys("Selenium")
     # submit_button.click()
 
