@@ -17,16 +17,22 @@ def main ():
     title = driver.title
 
     driver.implicitly_wait(0.10)
-
+    stock_symbol = 'GME'
     # Search Bar
     search_bar = driver.find_element(By.ID ,"yfin-usr-qry")
     # Search for user inputed stock symbol/tick and direct automation to page
-    search_bar.send_keys("GME", Keys.ENTER)
+    search_bar.send_keys(stock_symbol, Keys.ENTER)
     time.sleep(5)
 
-    # text_box = driver.find_element(by=By.NAME, value="my-text")
-    # submit_button = driver.find_element(by=By.CSS_SELECTOR, value="button")
+    # Extract the stock price
+    price_element = driver.find_element(By.XPATH ,f"//fin-streamer[@data-symbol='{stock_symbol}']")
+    stock_price = price_element.get_attribute("value")
 
+    print("Stock price:", stock_price)
+
+    # Extract the Price-to-Earnings (P/E) Ratio
+    price_to_earning = driver.find_element( By.XPATH,"//td[@data-test='PE_RATIO-value']")
+    print("P/E:", price_to_earning.text)
     # text_box.send_keys("Selenium")
     # submit_button.click()
 
