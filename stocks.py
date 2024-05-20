@@ -10,7 +10,7 @@ class Stock:
         self.dividend_yield = dividend_yield
         self.market_cap = market_cap
         self.doe_ratio = doe_ratio
-        self.stock_list = []
+        # self.stock_list = []
 
 
 
@@ -18,8 +18,10 @@ class Stock:
         pass
 
     def add_stock(self, symbol):
-        scraper = StockScraper()
-        scraper.collect_stock_stats(symbol)
+        # scraper = StockScraper()
+        # scraper.collect_stock_stats(symbol)
+        file = open("stock_list.txt", "a")
+        file.write(f"{symbol}\n")
 
     def remove_stock(self, symbol):
         pass
@@ -29,3 +31,14 @@ class Stock:
 class Report:
     def __init__(self):
         pass
+
+
+# Contain Logic for getting stocks from list
+
+def read_stock_symbols(filename):
+    try:
+        with open(filename, 'r') as file:
+            return[line.strip() for line in file.readlines()]
+    except FileNotFoundError:
+        print("Stock symbols file no foound")
+        return []
