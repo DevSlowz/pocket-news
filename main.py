@@ -4,6 +4,7 @@ from selenium.webdriver.common.keys import Keys
 from stocks import Stock, read_stock_symbols
 from scraper import StockScraper
 import time
+import os
 def main ():
 
     main_menu_option = ""
@@ -17,14 +18,28 @@ def main ():
     while exit == False:
         main_menu_option = input('''
 Please enter an option: 
-1. View active stats on current list of stocks 
-2. View list of active stocks 
-3. Remove stock Symbol 
-4. Add stock symbol 
+1. View list of active stocks 
+2. Remove stock Symbol 
+3. Add stock symbol 
 Option: ''')
     
         if main_menu_option == "1":
-            pass
+            stocks = read_stock_symbols("stock_list.txt")
+            print(stocks)
+            menu_option = input("1. View stats for all \n2. View stat for specific stock\nOption: ")
+            if menu_option == "1":
+                # Logic for generating report
+                pass
+            elif menu_option == "2":
+                stock_option = input("Please enter valid stock symbol from list: ")
+                if stock_option in stocks:
+                    stock = Stock(stock_option, 0, 0, 0, 0, 0, 0) 
+                    stock.display_stock(stock_option)
+                    
+            else:
+                print("invalid option. Please try again")
+                os.system('cls')
+
 
     
         elif main_menu_option == "4" :
