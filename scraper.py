@@ -66,10 +66,10 @@ class StockScraper:
         driver.quit()
         print(title)
 
-    def collect_articles(self) :
+    def collect_articles(self, symbol) :
         driver = webdriver.Chrome()
 
-        driver.get("https://ca.finance.yahoo.com/quote/GME")
+        driver.get(f"https://ca.finance.yahoo.com/quote/{symbol}")
 
         li_items = driver.find_element(By.ID, "quoteNewsStream-0-Stream")
         ul_element = li_items.find_element(By.TAG_NAME, "ul")
