@@ -1,3 +1,5 @@
+from scraper import StockScraper
+
 class Stock:
     def __init__(self, stock_symbol, stock_price, price_to_earning, earning_per_share,
                  dividend_yield, market_cap, doe_ratio):
@@ -16,7 +18,8 @@ class Stock:
         pass
 
     def add_stock(self, symbol):
-        pass
+        scraper = StockScraper()
+        scraper.collect_stock_stats(symbol)
 
     def remove_stock(self, symbol):
         pass

@@ -1,5 +1,3 @@
-from stocks import Stock
-
 # Scraper libraries 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -8,10 +6,10 @@ import time
 
 class StockScraper:
 
-    def __init__(self, url):
-        pass
+    # def __init__(self):
+    #     pass
 
-    def collect_stock_stats(self):
+    def collect_stock_stats(self, symbol):
         driver = webdriver.Chrome()
 
         driver.get("https://ca.finance.yahoo.com/")
@@ -19,7 +17,7 @@ class StockScraper:
         title = driver.title
 
         driver.implicitly_wait(0.10)
-        stock_symbol = 'FFIE'
+        stock_symbol = symbol
         # Search Bar
         search_bar = driver.find_element(By.ID ,"yfin-usr-qry")
         # Search for user inputed stock symbol/tick and direct automation to page
