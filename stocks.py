@@ -1,21 +1,24 @@
 from scraper import StockScraper
 
 class Stock:
-    def __init__(self, stock_symbol, stock_price, price_to_earning, earning_per_share,
-                 dividend_yield, market_cap, doe_ratio):
+    def __init__(self, stock_symbol):
         self.stock_symbol = stock_symbol
-        self.stock_price = stock_price
-        self.price_to_earning = price_to_earning
-        self.earning_per_share = earning_per_share
-        self.dividend_yield = dividend_yield
-        self.market_cap = market_cap
-        self.doe_ratio = doe_ratio
+        self.stock_price = None
+        self.price_to_earning = None
+        self.earning_per_share = None
+        self.dividend_yield = None
+        self.market_cap = None
+        self.doe_ratio = None
         # self.stock_list = []
 
 
 
     def display_stocks(self):
         pass
+
+    def display_stock(self, symbol):
+        scraper = StockScraper()
+        scraper.collect_stock_stats(symbol)
 
     def add_stock(self, symbol):
         # scraper = StockScraper()
