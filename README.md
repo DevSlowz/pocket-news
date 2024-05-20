@@ -7,3 +7,8 @@
 - [ ] Create feature that allows a user to add a stock symbols to a list where they can add or remove symbols. This will allow them to query all stocks at the same time rather than 1 by 1.
 - [ ] Refactor code to utilze multiple files instead of all code in main
 - [ ] Find sms api to enable sending sms
+
+# Security & Best Practices
+
+- [ ] Clean and validate all input collected from user
+  - [ ] Inital option input
