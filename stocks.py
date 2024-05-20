@@ -12,7 +12,6 @@ class Stock:
 
 
 
-    def collect_stock_stats(self):
-        pass
+
 
 
