@@ -12,6 +12,17 @@ class Stock:
 
 
 
+    def display_stocks(self):
+        pass
+
+    def add_stock(self, symbol):
+        pass
+
+    def remove_stock(self, symbol):
+        pass
 
 
-
+# Contain logic to generate a report on stocks
+class Report:
+    def __init__(self):
+        pass
