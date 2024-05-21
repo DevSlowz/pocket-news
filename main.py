@@ -3,12 +3,12 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from stocks import Stock, read_stock_symbols
 from scraper import StockScraper
+from stocks import Report
 import time
 import os
 def main ():
 
     main_menu_option = ""
-    scraper = StockScraper()
     exit = False
     # Welcome Message
     print("Welcom to Pocket News Your Handy Partner For Keeping Track Of Stocks.")
@@ -28,8 +28,16 @@ Option: ''')
             print(stocks)
             menu_option = input("1. View stats for all \n2. View stat for specific stock\nOption: ")
             if menu_option == "1":
-                # Logic for generating report
-                pass
+                # Logic for generati    # @staticmethod
+    # def generate_report(stock):
+    #     print("Report for:", stock.stock_symbol)ng report
+                # Stock(stock_option, 0, 0, 0, 0, 0, 0) 
+                for stock in stocks:
+                    stock_info = Stock(stock)
+                    scrapper = StockScraper(stock_info)
+                    scrapper.collect_stock_stats(stock_info.stock_symbol)
+                    scrapper.generate_report(Stock(stock))
+               
             elif menu_option == "2":
                 stock_option = input("Please enter valid stock symbol from list: ")
                 if stock_option in stocks:
