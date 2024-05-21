@@ -26,8 +26,16 @@ class Stock:
         file = open("stock_list.txt", "a")
         file.write(f"{symbol}\n")
 
+    
     def remove_stock(self, symbol):
-        pass
+        with open("stock_list.txt", "r+") as f:
+            d = f.readlines()
+            f.seek(0)
+            for i in d:
+                #remove leading/trailing whitespace, including newline characters
+                if i.strip() != symbol:  
+                    f.write(i)
+            f.truncate()
 
 
 # Contain logic to generate a report on stocks
