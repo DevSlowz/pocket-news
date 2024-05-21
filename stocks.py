@@ -32,8 +32,12 @@ class Stock:
 
 # Contain logic to generate a report on stocks
 class Report:
-    def __init__(self):
+
+    @staticmethod
+    def generate_report(stock):
         pass
+
+
 
 
 # Contain Logic for getting stocks from list
