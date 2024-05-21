@@ -19,19 +19,17 @@ def main ():
         main_menu_option = input('''
 Please enter an option: 
 1. View list of active stocks 
-2. Remove stock Symbol 
-3. Add stock symbol 
+2. Add stock symbol 
+3. Remove stock Symbol 
 Option: ''')
     
         if main_menu_option == "1":
             stocks = read_stock_symbols("stock_list.txt")
             print(stocks)
+            # Main menu option 1 internal menu
             menu_option = input("1. View stats for all \n2. View stat for specific stock\nOption: ")
             if menu_option == "1":
-                # Logic for generati    # @staticmethod
-    # def generate_report(stock):
-    #     print("Report for:", stock.stock_symbol)ng report
-                # Stock(stock_option, 0, 0, 0, 0, 0, 0) 
+
                 for stock in stocks:
                     stock_info = Stock(stock)
                     scrapper = StockScraper(stock_info)
@@ -46,19 +44,43 @@ Option: ''')
                     
             else:
                 print("invalid option. Please try again")
-                os.system('cls')
+                os.system('clear')
 
+        elif main_menu_option == "2":            
+            add_symbol = input("Please enter a valid symbol you would like to add: ")
+            stock = Stock(add_symbol)
+            scrapper = StockScraper(add_symbol)
+            try:
+                # Check if the symbol is valid
+                if scrapper.is_valid(add_symbol):
+                    # If the symbol is valid, add it
+                    stock.add_stock(add_symbol)
+                else:
+                    # If the symbol is not valid, print an error message
+                    print("Invalid Stock Symbol")
+            except Exception as e:
+                # Handle any other exceptions
+                print("Error:", e)
+
+             
+            
+            # Initialize Stock instance
 
     
-        elif main_menu_option == "4" :
-            add_symbol = ""
-            add_symbol = input("Please enter valid symbol you would like to add: ")
-            stock = Stock(add_symbol, 0, 0, 0, 0, 0, 0) 
-            stock.add_stock(add_symbol)
-            # Initialize Stock instance
+        elif main_menu_option == "3" :
+            stock_list = read_stock_symbols("stock_list.txt")
+            print(stock_list)
+            remove_symbol = ""
+            remove_symbol = input("Please enter valid symbol you would like to remove: ")
+            stock = Stock(remove_symbol) 
+            stock.remove_stock(remove_symbol)
             
             # stock.add_stock(add_symbol)
             # scraper.collect_articles(add_symbol)
+
+        else:
+            print("invalid option...Closing program")
+            exit = True
         
 
 

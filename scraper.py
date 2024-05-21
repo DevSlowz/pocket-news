@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import time
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.common.exceptions import NoSuchElementException
 
 class StockScraper:
 
@@ -105,3 +106,20 @@ class StockScraper:
         print("Debt-to-Equity Ratio:", self.stock.doe_ratio)
         print("--------------------------------------")
         print("")
+
+    def is_valid(self, symbol):
+        driver = webdriver.Chrome()
+        driver.get("https://ca.finance.yahoo.com/")
+        driver.implicitly_wait(0.10)
+        stock_symbol = symbol
+        search_bar = driver.find_element(By.ID ,"yfin-usr-qry")
+        search_bar.send_keys(stock_symbol, Keys.ENTER)
+        time.sleep(8)
+
+        try:
+            # Attempt to find the price element
+            price_element = driver.find_element(By.CSS_SELECTOR, "fin-streamer[data-test='qsp-price']")
+            return True
+        except NoSuchElementException:
+             # If the element is not found, raise an exception
+            return False
