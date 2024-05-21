@@ -17,16 +17,18 @@ class StockScraper:
 
         title = driver.title
 
-        driver.implicitly_wait(0.10)
+        driver.implicitly_wait(0.20)
         stock_symbol = symbol
         # Search Bar
         search_bar = driver.find_element(By.ID ,"yfin-usr-qry")
         # Search for user inputed stock symbol/tick and direct automation to page
         search_bar.send_keys(stock_symbol, Keys.ENTER)
-        time.sleep(5)
+        time.sleep(8)
 
         # Extract the stock price
-        price_element = driver.find_element(By.XPATH ,f"//fin-streamer[@data-symbol='{stock_symbol}']")
+        # price_element = driver.find_element(By.XPATH ,f"//fin-streamer[@data-symbol='{stock_symbol}']")
+        price_element = driver.find_element(By.CSS_SELECTOR, "fin-streamer[data-test='qsp-price']")
+
         self.stock.stock_price = price_element.get_attribute("value")
 
         # print("Stock price:", self.stock.stock_price)
@@ -49,7 +51,7 @@ class StockScraper:
 
         # Navigate to the Statisitics page
         driver.find_element( By.XPATH,'//*[@id="quote-nav"]/ul/li[4]/a').click()
-        time.sleep(2)
+        time.sleep(5)
 
         # Extract the Debt-to-Equity Ratio
         self.stock.doe_ratio = driver.find_element( By.XPATH, '//*[@id="Col1-0-KeyStatistics-Proxy"]/section/div[2]/div[3]/div/div[5]/div/div/table/tbody/tr[4]/td[2]').text
@@ -92,6 +94,8 @@ class StockScraper:
 
 
     def generate_report(self, stock):
+        print("")
+        print("--------------------------------------")
         print("Report for:", stock.stock_symbol)
         print("Stock price:", self.stock.stock_price)
         print("P/E:", self.stock.price_to_earning)
@@ -100,4 +104,4 @@ class StockScraper:
         print("Market Cap:", self.stock.market_cap)
         print("Debt-to-Equity Ratio:", self.stock.doe_ratio)
         print("--------------------------------------")
-
+        print("")
