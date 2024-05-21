@@ -7,8 +7,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 class StockScraper:
 
-    # def __init__(self):
-    #     pass
+    def __init__(self, stock):
+        self.stock = stock
 
     def collect_stock_stats(self, symbol):
         driver = webdriver.Chrome()
@@ -27,33 +27,33 @@ class StockScraper:
 
         # Extract the stock price
         price_element = driver.find_element(By.XPATH ,f"//fin-streamer[@data-symbol='{stock_symbol}']")
-        stock_price = price_element.get_attribute("value")
+        self.stock.stock_price = price_element.get_attribute("value")
 
-        print("Stock price:", stock_price)
+        # print("Stock price:", self.stock.stock_price)
 
         # Extract the Price-to-Earnings (P/E) Ratio
-        price_to_earning = driver.find_element( By.XPATH,"//td[@data-test='PE_RATIO-value']")
-        print("P/E:", price_to_earning.text)
+        self.stock.price_to_earning = driver.find_element( By.XPATH,"//td[@data-test='PE_RATIO-value']").text
+        # print("P/E:", self.stock.price_to_earning.text)
 
         # Extract the Earnings Per Share (EPS)
-        earning_per_share = driver.find_element( By.XPATH,"//td[@data-test='EPS_RATIO-value']")
-        print("EPS:", earning_per_share.text)
+        self.stock.earning_per_share = driver.find_element( By.XPATH,"//td[@data-test='EPS_RATIO-value']").text
+        # print("EPS:", self.stock.earning_per_share.text)
 
         # Extract the Dividend Yield
-        dividend_yield = driver.find_element( By.XPATH,"//td[@data-test='DIVIDEND_AND_YIELD-value']")
-        print("Dividend Yield:", dividend_yield.text)
+        self.stock.dividend_yield = driver.find_element( By.XPATH,"//td[@data-test='DIVIDEND_AND_YIELD-value']").text
+        # print("Dividend Yield:", self.stock.dividend_yield.text)
 
         # Extract the Market Cap
-        market_cap = driver.find_element( By.XPATH,"//td[@data-test='MARKET_CAP-value']")
-        print("Market Cap:", market_cap.text)
+        self.stock.market_cap = driver.find_element( By.XPATH,"//td[@data-test='MARKET_CAP-value']").text
+        # print("Market Cap:", self.stock.market_cap.text)
 
         # Navigate to the Statisitics page
         driver.find_element( By.XPATH,'//*[@id="quote-nav"]/ul/li[4]/a').click()
         time.sleep(2)
 
         # Extract the Debt-to-Equity Ratio
-        doe_ratio = driver.find_element( By.XPATH, '//*[@id="Col1-0-KeyStatistics-Proxy"]/section/div[2]/div[3]/div/div[5]/div/div/table/tbody/tr[4]/td[2]')
-        print("Debt-to-Equity Ratio:", doe_ratio.text)
+        self.stock.doe_ratio = driver.find_element( By.XPATH, '//*[@id="Col1-0-KeyStatistics-Proxy"]/section/div[2]/div[3]/div/div[5]/div/div/table/tbody/tr[4]/td[2]').text
+        # print("Debt-to-Equity Ratio:", self.stock.doe_ratio.text)
         
 
 
@@ -89,4 +89,15 @@ class StockScraper:
 
         # Close the driver
         driver.quit()
+
+
+    def generate_report(self, stock):
+        print("Report for:", stock.stock_symbol)
+        print("Stock price:", self.stock.stock_price)
+        print("P/E:", self.stock.price_to_earning)
+        print("EPS:", self.stock.earning_per_share)
+        print("Dividend Yield:", self.stock.dividend_yield)
+        print("Market Cap:", self.stock.market_cap)
+        print("Debt-to-Equity Ratio:", self.stock.doe_ratio)
+        print("--------------------------------------")
 
